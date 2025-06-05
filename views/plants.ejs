@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="it" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Mia Pagina - Tema Scuro</title>
+    <link href="https://cdn.jsdelivr.net/npm/@preline/preline@1.0.0/dist/preline.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif; /* Preline spesso usa Inter */
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-300">
+<% if (error) { %>
+    <div class="bg-red-600 text-sm text-white rounded-none p-3 text-center" role="alert">
+        <span class="font-bold">Attenzione:</span><%= error %>
+    </div>
+<% } %>
+<header class="flex flex-wrap sm:justify-start sm:flex-nowrap z-50 w-full bg-gray-800 border-b border-gray-700 text-sm py-4 dark:bg-gray-800 dark:border-gray-700">
+    <nav class="max-w-[85rem] w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between" aria-label="Global">
+        <div class="flex items-center justify-between">
+            <a class="flex-none text-xl font-semibold text-white dark:text-white" href="#" aria-label="Brand">Mio Sito</a>
+            <div class="sm:hidden">
+                <button type="button" class="hs-collapse-toggle p-2 inline-flex justify-center items-center gap-2 rounded-md border border-gray-700 font-medium bg-gray-800 text-gray-400 shadow-sm align-middle hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900 focus:ring-blue-600 transition-all text-sm dark:bg-gray-800 dark:hover:bg-slate-700 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800" data-hs-collapse="#navbar-collapse-with-animation" aria-controls="navbar-collapse-with-animation" aria-label="Toggle navigation">
+                    <svg class="hs-collapse-open:hidden w-4 h-4" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+                    </svg>
+                    <svg class="hs-collapse-open:block hidden w-4 h-4" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div id="navbar-collapse-with-animation" class="hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow sm:block">
+            <div class="flex flex-col gap-5 mt-5 sm:flex-row sm:items-center sm:justify-end sm:mt-0 sm:pl-5">
+                <a class="font-medium text-blue-500" href="#" aria-current="page">Home</a>
+                <a class="font-medium text-gray-400 hover:text-gray-200 dark:text-gray-400 dark:hover:text-gray-200" href="#">Servizi</a>
+                <a class="font-medium text-gray-400 hover:text-gray-200 dark:text-gray-400 dark:hover:text-gray-200" href="#">Chi Siamo</a>
+                <a class="font-medium text-gray-400 hover:text-gray-200 dark:text-gray-400 dark:hover:text-gray-200" href="#">Contatti</a>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<main class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold text-white mb-8 text-center">Benvenuto sulla Mia Pagina!</h1>
+
+
+
+    <div class="flex justify-center mb-8">
+        <a href="/plants/create" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-green-600 rounded-lg hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-800">
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+            </svg>
+            Crea Nuovo Elemento
+        </a>
+    </div>
+
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center">
+        <% if(plantsData) { %>
+            <% plantsData.forEach(function(plant){ %>
+                <div class="w-full max-w-xs bg-gray-800 rounded-lg shadow-lg overflow-hidden border border-gray-700 relative">
+                    <div class="absolute top-3 right-3 flex gap-2 z-10">
+                        <a href="plants/modify?id=<%= plant.dataValues.idplant %>&csrf=<%= csrf %>" class="flex items-center justify-center p-1.5 bg-white rounded-full shadow-sm hover:bg-gray-100 transition-colors duration-200" title="Modifica">
+                            <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-7-9l4 4L19 7l-4-4-4 4zM15 4l3 3"></path>
+                            </svg>
+                        </a>
+                        <a href="plants/delete?id=<%= plant.dataValues.idplant %>&csrf=<%= csrf %>" class="flex items-center justify-center p-1.5 bg-white rounded-full shadow-sm hover:bg-gray-100 transition-colors duration-200" title="Elimina">
+                            <svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                            </svg>
+                        </a>
+                    </div>
+                    <img class="w-full h-48 object-cover"
+                         src="<%= plant.dataValues.photos[0] ? plant.dataValues.photos[0].path : '/public/img/placeholder.jpg'%>"
+                         alt="Immagine della pianta">
+                    <div class="p-5">
+                        <h2 class="text-xl font-bold text-white mb-2"><%=plant.dataValues.name%></h2>
+                        <p class="text-gray-400 text-sm">
+                            <%=plant.dataValues.descriptions%>
+                        </p>
+                        <div class="mt-4 flex justify-end">
+                            <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-800">
+                                Maggiori Dettagli
+                                <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            <% }); %>
+        <% } %>
+    </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/preline/dist/preline.js"></script>
+</body>
+</html>
