@@ -1,4 +1,3 @@
-# plant-app
 Gestione Piante - La Tua App per Amanti del Verde
 Benvenuto nel progetto "Gestione Piante"! Questa è un'applicazione web robusta e sicura, sviluppata con Node.js ed Express, pensata per aiutarti a tenere traccia delle tue piante in modo efficiente e intuitivo.
 
